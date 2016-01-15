@@ -1,3 +1,5 @@
+
+
 """This file should have our order classes in it."""
 
 class AbstractMelonOrder(object):
@@ -10,14 +12,20 @@ class AbstractMelonOrder(object):
         self.shipped = False
         self.country_code = country_code
         
+    def get_base_price(self):
+        from random import randint
+
+        self.base_price = randint(5,9)
+
+
 
     def get_total(self):
         """Calculate price."""
         
-        base_price = 5
+        # base_price = 5
 
         if "christmas" in self.species:
-            base_price = base_price * 1.5
+            base_price = self.base_price * 1.5
     
         total = (1 + self.tax) * self.qty * base_price
     
@@ -41,7 +49,6 @@ class GovernmentMelonOrder(AbstractMelonOrder):
 
     def inspect_melons(self, passed):
         """Takes boolean determining if everything passed inspection"""
-
 
         if passed == True:
             self.passed_inspection = True
