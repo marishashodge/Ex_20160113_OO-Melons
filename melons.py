@@ -11,7 +11,6 @@ class AbstractMelonOrder(object):
         self.country_code = country_code
         
 
-
     def get_total(self):
         """Calculate price."""
         
@@ -19,9 +18,7 @@ class AbstractMelonOrder(object):
 
         if "christmas" in self.species:
             base_price = base_price * 1.5
-        else:
-            pass
-        
+    
         total = (1 + self.tax) * self.qty * base_price
     
         if self.country_code != None and self.qty < 10:
@@ -34,6 +31,20 @@ class AbstractMelonOrder(object):
         """Set shipped to true."""
 
         self.shipped = True
+
+
+class GovernmentMelonOrder(AbstractMelonOrder):
+    """A tax free order that needs an inspection"""
+    tax = 0.0
+
+    passed_inspection = False
+
+    def inspect_melons(self, passed):
+        """Takes boolean determining if everything passed inspection"""
+
+
+        if passed == True:
+            self.passed_inspection = True
 
 
 class DomesticMelonOrder(AbstractMelonOrder):
