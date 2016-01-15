@@ -2,12 +2,13 @@
 
 class AbstractMelonOrder(object):
  
-    def __init__(self, species, qty):
+    def __init__(self, species, qty, country_code=None):
         """Initialize melon order attributes"""
 
         self.species = species
         self.qty = qty
         self.shipped = False
+        self.country_code = country_code
 
     def get_total(self):
         """Calculate price."""
@@ -33,24 +34,9 @@ class DomesticMelonOrder(AbstractMelonOrder):
 class InternationalMelonOrder(AbstractMelonOrder):
     """An international (non-US) melon order."""
        
-    def __init__(self, species, qty, country_code):
-        """Initialize melon order attributes"""
-
-        self.species = species
-        self.qty = qty
-        self.shipped = False
-        self.order_type = "international"
-        self.tax = 0.17
-        self.country_code = country_code
-
+    order_type = "international"
+    tax = 0.17
+    
     def get_country_code(self):
         """Return the country code."""
         return self.country_code
-
-   
-    
-
-    # def __init__(self, country_code):
-    #     self.country_code = country_code
-
-
